@@ -260,6 +260,12 @@ function packSVG(p, i) {
   return `<svg viewBox="0 0 120 150" class="w-full h-full drop-shadow-md" role="img" aria-label="${esc(p.brand + " " + p.name)}">${grad}${body}</svg>`;
 }
 
+// Dateiname des Produktfotos (img/produkte/<slug>.webp)
+function slug(t) {
+  return t.toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 // ---------- Rendering, Filter & Suche ----------
 const euro = n => n.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
 
@@ -278,7 +284,7 @@ function renderCatalog() {
       <span class="text-sm font-medium text-slate-500">(${items.length})</span></h3>`;
     html += items.map(([p, i]) => `
       <article class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col">
-        <div class="bg-gradient-to-b from-stone-100 to-white aspect-[4/5] p-4">${packSVG(p, i)}</div>
+        <div class="bg-stone-100 aspect-square flex items-center justify-center overflow-hidden"><img src="img/produkte/${slug(p.brand + " " + p.name)}.webp" alt="${esc(p.brand + " " + p.name)}" loading="lazy" class="w-full h-full object-contain" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'w-full h-full p-4',innerHTML:packSVG(PRODUCTS[${i}],${i})}))"></div>
         <div class="p-4 flex flex-col flex-1">
           <p class="text-xs font-semibold uppercase tracking-wide text-teal-700">${esc(p.brand)}</p>
           <h4 class="font-bold leading-snug">${esc(p.name)}</h4>

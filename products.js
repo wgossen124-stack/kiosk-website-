@@ -284,7 +284,7 @@ function renderCatalog() {
       <span class="text-sm font-medium text-slate-500">(${items.length})</span></h3>`;
     html += items.map(([p, i]) => `
       <article class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col">
-        <div class="bg-stone-100 aspect-square flex items-center justify-center overflow-hidden"><img src="img/produkte/${slug(p.brand + " " + p.name)}.webp" alt="${esc(p.brand + " " + p.name)}" loading="lazy" class="w-full h-full object-contain" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'w-full h-full p-4',innerHTML:packSVG(PRODUCTS[${i}],${i})}))"></div>
+        <div class="bg-gradient-to-b from-white to-stone-100 aspect-square flex items-center justify-center overflow-hidden p-3"><img src="img/produkte/${slug(p.brand + " " + p.name)}.webp" alt="${esc(p.brand + " " + p.name)}" loading="lazy" class="w-full h-full object-contain" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'w-full h-full p-4',innerHTML:packSVG(PRODUCTS[${i}],${i})}))"></div>
         <div class="p-4 flex flex-col flex-1">
           <p class="text-xs font-semibold uppercase tracking-wide text-teal-700">${esc(p.brand)}</p>
           <h4 class="font-bold leading-snug">${esc(p.name)}</h4>
